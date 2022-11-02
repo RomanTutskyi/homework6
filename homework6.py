@@ -76,16 +76,16 @@ def sort(file: Path):
     file_suffix = file.suffix.lower()
     
     file_name = file.stem
-    a = 0
+    zero_station = 0
      
     for key, values in EXTENTIONS.items():
         if file_suffix in values:
-            a = key 
-    if a != 0: 
+            zero_station = key 
+    if zero_station != 0: 
         norm_name = normalize(file_name)
         new_file_name = norm_name + file_suffix
         
-        end_folder = main_folder.joinpath(a)
+        end_folder = main_folder.joinpath(zero_station)
 
         
         end_folder.mkdir(exist_ok=True)
@@ -111,7 +111,7 @@ def sort(file: Path):
             time_stamp = time.time()
             new_file_path = end_folder.joinpath(norm_name + '_' + str(time_stamp) + file_suffix)
             file.rename(new_file_path)
-    a = 0
+    
 
 
             
@@ -152,12 +152,12 @@ def normalize(file_name: str) -> str:
     
     some = re.findall(r'[a-zA-Z0-9]', new_name)
     
-    for i in name:
-        if i not in some:
+    for littera in name:
+        if littera not in some:
             result += '_'
             continue 
         else:
-            result += i
+            result += littera
     result =  result + '.' + ext 
     namedir = os.path.dirname(file_name)
     new_filepath = os.path.join(namedir, result)
@@ -167,9 +167,9 @@ def normalize(file_name: str) -> str:
         print("| No need changes")
         print("|{}".format("-"*50))
     
-    for i in new_name:
-        if not i.isdigit() and not i.isalpha() and i != '_':
-            new_name = new_name.replace(i, '_')
+    for symvol in new_name:
+        if not symvol.isdigit() and not symvol.isalpha() and symvol != '_':
+            new_name = new_name.replace(symvol, '_')
     print(result,'Adekvetne imya')
     return new_name
 
