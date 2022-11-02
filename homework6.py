@@ -1,13 +1,8 @@
-
-
 import os
 import sys
 from pathlib import Path
 import re
 import time
-
-
-
 
 EXTENTIONS = {
     'images': ('.jpeg', '.png', '.jpg', '.svg', '.dng'),
@@ -17,17 +12,13 @@ EXTENTIONS = {
     'archives': ('.zip', '.gz', '.tar'),
 }
 
-
 CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ"
-
-
 
 TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
                "f", "h", "ts", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya", "je", "i", "ji", "g")
 TRANS = {}
 
 main_folder: Path | None = None
-
 
 def check_path():
     
@@ -47,7 +38,6 @@ def check_path():
     main_folder = true_folder
     translate()
     check_files(true_folder)
-
 
 def check_files(folder: Path):
     for file in folder.iterdir():
@@ -69,7 +59,6 @@ def check_files(folder: Path):
             if not any(file.iterdir()):
                 file.rmdir()
                 print(f'{file} deleting')
-
 
 def sort(file: Path):
     path = Path(file)
@@ -111,33 +100,11 @@ def sort(file: Path):
             time_stamp = time.time()
             new_file_path = end_folder.joinpath(norm_name + '_' + str(time_stamp) + file_suffix)
             file.rename(new_file_path)
-    
-
-
-            
-            
-
-
-
-
-                
-
-
-
-
-                
-
-            
-            
-            
-            
-            
 
 def translate():
     for cyril, latin in zip(CYRILLIC_SYMBOLS, TRANSLATION):
         TRANS[ord(cyril)] = latin
         TRANS[ord(cyril.upper())] = latin.upper()
-
 
 def normalize(file_name: str) -> str:
     result = ""
@@ -172,9 +139,6 @@ def normalize(file_name: str) -> str:
             new_name = new_name.replace(symvol, '_')
     print(result,'Adekvetne imya')
     return new_name
-
-   
-
 
 if __name__ == '__main__':
     
